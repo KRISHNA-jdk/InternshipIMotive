@@ -18,6 +18,8 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
+    private final ViralityService viralityService;
+    private final GRService grService;
 
     public Comment addComment(Long postId, CommentRequest request) {
 
@@ -38,6 +40,19 @@ public class CommentService {
         }
 
         comment.setCreatedAt(LocalDateTime.now());
+
+        if (request.getAuthorType().equals("BOT")) {
+
+            grService.checkBotLimit(postId);
+
+            grService.checkCool(request.getAuthorId(), 1L);
+
+            viralityService.updateScore(postId, "BOT_REPLY");
+
+        } else {
+
+            viralityService.updateScore(postId, "COMMENT");
+        }
 
         return commentRepository.save(comment);
     }

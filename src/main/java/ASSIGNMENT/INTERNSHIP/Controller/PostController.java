@@ -3,6 +3,7 @@ package ASSIGNMENT.INTERNSHIP.Controller;
 import ASSIGNMENT.INTERNSHIP.DTO.PostRequest;
 import ASSIGNMENT.INTERNSHIP.Entity.Post;
 import ASSIGNMENT.INTERNSHIP.Service.PostService;
+import ASSIGNMENT.INTERNSHIP.Service.ViralityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
 
     private final PostService postService;
+    private final ViralityService viralityService;
 
     @PostMapping
     public ResponseEntity<Post> createPost(@RequestBody PostRequest request) {
@@ -21,6 +23,7 @@ public class PostController {
 
     @PostMapping("/{postId}/like")
     public ResponseEntity<String> likePost(@PathVariable Long postId) {
-        return ResponseEntity.ok("Post liked (logic in Phase 2)");
+        viralityService.updateScore(postId, "LIKE");
+        return ResponseEntity.ok("Post liked");
     }
 }
