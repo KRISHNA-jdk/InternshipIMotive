@@ -12,7 +12,7 @@ public class ViralityService {
 
     public void updateScore(Long postId, String actionType){
 
-        String key = "post" + postId + "virality_score";
+        String key = "post:" + postId + ":virality_score";
 
         int increment = switch (actionType){
             case "BOT_REPLY" -> 1;

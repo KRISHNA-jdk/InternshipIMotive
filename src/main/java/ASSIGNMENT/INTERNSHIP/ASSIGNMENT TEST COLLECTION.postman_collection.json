@@ -1,0 +1,133 @@
+{
+  "info": {
+    "_postman_id": "d72e3913-52ac-4043-9720-87a57fa48755",
+    "name": "ASSIGNMENT TEST COLLECTION",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50555756",
+    "_collection_link": "https://go.postman.co/collection/50555756-d72e3913-52ac-4043-9720-87a57fa48755?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "CREATE POST",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"authorId\": \"1002\",\r\n    \"authorType\": \"BOT\",\r\n    \"content\" : \"TESTING SAMPLES\",\r\n    \"depthLevel\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/posts",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "posts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CREATE COMMENT (BOT)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"authorId\": \"1002\",\r\n    \"authorType\": \"BOT\",\r\n    \"content\" : \"TESTING SAMPLES\",\r\n    \"depthLevel\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/posts/8/comments",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "posts",
+            "8",
+            "comments"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CREATE COMMENT (USER)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"authorId\": \"1002\",\r\n    \"authorType\": \"USER\",\r\n    \"content\" : \"TESTING SAMPLES\",\r\n    \"depthLevel\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/posts/2/comments",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "posts",
+            "2",
+            "comments"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "LIKE POST",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/posts/8/like",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "posts",
+            "8",
+            "like"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

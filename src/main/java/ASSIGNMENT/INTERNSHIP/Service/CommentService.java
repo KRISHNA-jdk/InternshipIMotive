@@ -1,12 +1,15 @@
 package ASSIGNMENT.INTERNSHIP.Service;
 
+
 import ASSIGNMENT.INTERNSHIP.DTO.CommentRequest;
 import ASSIGNMENT.INTERNSHIP.ENUM.AuthorType;
 import ASSIGNMENT.INTERNSHIP.Entity.Comment;
+import ASSIGNMENT.INTERNSHIP.Entity.Post;
 import ASSIGNMENT.INTERNSHIP.Exception.BadRequestException;
 import ASSIGNMENT.INTERNSHIP.Exception.ResourceNotFoundException;
 import ASSIGNMENT.INTERNSHIP.Repository.CommentRepository;
 import ASSIGNMENT.INTERNSHIP.Repository.PostRepository;
+import ASSIGNMENT.INTERNSHIP.Service.NotificationsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,7 @@ public class CommentService {
     private final PostRepository postRepository;
     private final ViralityService viralityService;
     private final GRService grService;
+    private final NotificationsService notificationService;
 
     public Comment addComment(Long postId, CommentRequest request) {
 
@@ -45,9 +49,13 @@ public class CommentService {
 
             grService.checkBotLimit(postId);
 
-            grService.checkCool(request.getAuthorId(), 1L);
-
             viralityService.updateScore(postId, "BOT_REPLY");
+
+            Post post = postRepository.findById(postId).orElseThrow(()-> new ResourceNotFoundException("POST NOT FOUND"));
+
+            Long userId = post.getAuthorId();
+
+            notificationService.handleNotification(userId, "Bot_" + request.getAuthorId());
 
         } else {
 

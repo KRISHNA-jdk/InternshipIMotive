@@ -2,6 +2,7 @@ package ASSIGNMENT.INTERNSHIP.Service;
 
 
 import ASSIGNMENT.INTERNSHIP.Exception.BadRequestException;
+import ASSIGNMENT.INTERNSHIP.Exception.TooManyRequestException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class GRService {
         Long count = stringRedisTemplate.opsForValue().increment(key);
 
         if(count != null && count > 100){
-            throw new BadRequestException("BOT LIMIT EXCEEDED 100");
+            throw new TooManyRequestException("Bot limit exceeded (max 100)");
         }
     }
 
